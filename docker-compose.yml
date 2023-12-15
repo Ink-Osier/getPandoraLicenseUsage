@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  get-pandora-next-usage:
+    image: wizerd/get-pandora-next-usage:latest
+    restart: always
+    ports:
+      - "53333:23333"
+    environment:
+      - PANDORA_LICENSE_ID=<PandoraNext License ID>
