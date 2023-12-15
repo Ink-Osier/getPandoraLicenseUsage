@@ -24,6 +24,14 @@ def get_pandora_next_lic_usage():
         # 保护license_id参数，仅显示前后3位
         data['license_id'] = f"{license_id[:3]}***{license_id[-3:]}"
 
+        # 保护ip参数，隐藏中间部分
+        ip = data['ip']
+        ip = ip.split('.')
+        ip[2] = '*'
+        ip[1] = '*'
+        ip = '.'.join(ip)
+        data['ip'] = ip
+
 
         return jsonify(data)
     else:
