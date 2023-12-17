@@ -6,8 +6,8 @@ import json
 app = Flask(__name__)
 
 
-VERSION = '0.0.3'
-UPDATE_INFO = '优化错误提示'
+VERSION = '0.0.4'
+UPDATE_INFO = '再次增加错误提示'
 
 @app.route('/api/getPandoraNextLicUsage', methods=['GET'])
 def get_pandora_next_lic_usage():
