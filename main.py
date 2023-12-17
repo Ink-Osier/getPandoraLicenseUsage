@@ -40,6 +40,7 @@ def get_pandora_next_lic_usage():
         return jsonify(data)
     else:
         print(f"无法从 Pandora Next 获取数据，状态码：{response.status_code}, 响应：{response.text}")
+        print(f"请求地址：https://dash.pandoranext.com/api/{license_id}/usage，可以尝试用相同的出口ip手动访问该链接")
         return jsonify({"error": "无法从 Pandora Next 获取数据"}), 500
 
 if __name__ == '__main__':
