@@ -5,6 +5,10 @@ import json
 
 app = Flask(__name__)
 
+
+VERSION = '0.0.3'
+UPDATE_INFO = '优化错误提示'
+
 @app.route('/api/getPandoraNextLicUsage', methods=['GET'])
 def get_pandora_next_lic_usage():
     # 向 Pandora Next API 发起请求
@@ -35,6 +39,7 @@ def get_pandora_next_lic_usage():
 
         return jsonify(data)
     else:
+        print(f"无法从 Pandora Next 获取数据，状态码：{response.status_code}, 响应：{response.text}")
         return jsonify({"error": "无法从 Pandora Next 获取数据"}), 500
 
 if __name__ == '__main__':
@@ -45,4 +50,6 @@ if __name__ == '__main__':
         # 退出
         print("未设置 Pandora License ID 环境变量")
         exit(1)
+    print(f"Version: {VERSION}")
+    print(f"Update Info: {UPDATE_INFO}")
     app.run(host='0.0.0.0', port=23333)
