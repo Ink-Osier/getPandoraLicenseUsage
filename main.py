@@ -53,7 +53,8 @@ def transfer_arkose():
     pandora_next_api = os.getenv('PANDORA_NEXT_BASE_URL')
     pandora_next_api_prefix = os.getenv('PANDORA_NEXT_API_PREFIX')
     # 发起一个携带参数为{'type': 'gpt-4'}的请求给PandoraNext的/api/arkose/token路径
-    response = requests.post(f'{pandora_next_api}/{pandora_next_api_prefix}/api/arkose/token', json={'type': 'gpt-4'})
+    payload = {'type': 'gpt-4'}
+    response = requests.post(f'{pandora_next_api}/{pandora_next_api_prefix}/api/arkose/token', data=payload)
     # 直接将响应转发回去
     return Response(response.text, mimetype='application/json')
 
