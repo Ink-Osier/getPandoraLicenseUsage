@@ -43,6 +43,20 @@ def get_pandora_next_lic_usage():
         print(f"请求地址：https://dash.pandoranext.com/api/{license_id}/usage，可以尝试用相同的出口ip手动访问该链接")
         return jsonify({"error": "无法从 Pandora Next 获取数据"}), 500
 
+@app.route('/api/transferArkose', methods=['POST'])
+def transfer_arkose():
+    # 解析json请求体中的secret参数，并检测是否为环境变量Secret中的值
+    secret = request.json.get('secret', '')
+    if secret != os.getenv('SECRET'):
+        return jsonify({"error": "Access Denied"}), 403
+    # 从环境变量里获取PandoraNext的地址和API前缀
+    pandora_next_api = os.getenv('PANDORA_NEXT_BASE_URL')
+    pandora_next_api_prefix = os.getenv('PANDORA_NEXT_API_PREFIX')
+    # 发起一个携带参数为{'type': 'gpt-4'}的请求给PandoraNext的/api/arkose/token路径
+    response = requests.post(f'{pandora_next_api}/{pandora_next_api_prefix}/api/arkose/token', json={'type': 'gpt-4'})
+    # 直接将响应转发回去
+    return Response(response.text, mimetype='application/json')
+
 if __name__ == '__main__':
     global license_id
     license_id = os.getenv('PANDORA_LICENSE_ID')

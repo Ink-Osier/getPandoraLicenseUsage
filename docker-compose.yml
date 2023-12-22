@@ -8,3 +8,6 @@ services:
       - "53333:23333"
     environment:
       - PANDORA_LICENSE_ID=<PandoraNext License ID>
+      - SECRET=<获取Arkose Token时使用的Secret>
+      - PANDORA_NEXT_BASE_URL=<PandoraNext的部署地址>
+      - PANDORA_NEXT_API_PREFIX=<PandoraNext的API前缀>
