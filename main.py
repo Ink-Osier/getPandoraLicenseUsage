@@ -43,7 +43,7 @@ def get_pandora_next_lic_usage():
         print(f"请求地址：https://dash.pandoranext.com/api/{license_id}/usage，可以尝试用相同的出口ip手动访问该链接")
         return jsonify({"error": "无法从 Pandora Next 获取数据"}), 500
 
-@app.route('/api/transferArkose', methods=['POST'])
+@app.route('/api/arkose/token', methods=['POST'])
 def transfer_arkose():
     # 解析json请求体中的secret参数，并检测是否为环境变量Secret中的值
     secret = ''
