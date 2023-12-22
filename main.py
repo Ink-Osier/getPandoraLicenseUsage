@@ -46,7 +46,12 @@ def get_pandora_next_lic_usage():
 @app.route('/api/transferArkose', methods=['POST'])
 def transfer_arkose():
     # 解析json请求体中的secret参数，并检测是否为环境变量Secret中的值
-    secret = request.json.get('secret', '')
+    secret = ''
+    if request.is_json:
+        secret = request.json.get('secret', '')
+    else:
+        # 如果不是 JSON 请求，则尝试从表单数据中获取 secret
+        secret = request.form.get('secret', '')
     if secret != os.getenv('SECRET'):
         return jsonify({"error": "Access Denied"}), 403
     # 从环境变量里获取PandoraNext的地址和API前缀
